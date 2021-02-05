@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<header>
+  <ul class="nav" id="nav">
+    <li class="nav-item">
+      <a class="nav-link active" id="pagetitle" aria-current="page" href="{{ url_for('app.user_page') }}" >TalkWith</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('app.logout') }}">ログアウト</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url_for('app.create_page') }}" class="btn btn-primary mt-1" role="button" data-bs-toggle="button">ページを作成する</a>
+    </li>
+  </ul>
+</header>
+{% endblock header %}
+
+{% block message %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endblock message %}
+
+{% block content %}
+  {% for page in create_page %}
+    <div class="card text-center" id="card-post">
+      <div class="card-header">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">トピック: {{ page.title }}</h5>
+        <p class="card-text">コンテンツ: {{ page.content }}</p>
+        <a href="{{ url_for('app.go_to_see', page_id=page.id) }}" class="btn btn-primary">見てみる</a>
+      </div>
+      <div class="card-footer text-muted">
+        投稿日: {{ page.time }}
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}

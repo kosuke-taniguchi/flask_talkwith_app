@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<header>
+  <ul class="nav" id="nav">
+    <li class="nav-item">
+      <a class="nav-link active" id="pagetitle" aria-current="page" href="{{ url_for('app.user_page') }}" >TalkWith</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('app.logout') }}">ログアウト</a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ url_for('app.post', page_id=page_id) }}" class="btn btn-primary mt-1" role="button" data-bs-toggle="button">投稿する</a>
+    </li>
+  </ul>
+</header>
+{% endblock header %}
+
+{% block message %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
+{% endfor %}
+{% endblock message %}
+
+{% block content %}
+{% for post in posts %}
+<div class="card text-center" id="card-post">
+  <div class="card-header">
+    {{ post.username }}
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ post.content }}</p>
+  </div>
+  <div class="card-footer text-muted">
+    {{ post.time }}
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

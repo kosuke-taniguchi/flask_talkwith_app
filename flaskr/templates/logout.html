@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<header>
+  <ul class="nav" id="nav">
+    <li class="nav-item">
+      <a class="nav-link active" id="pagetitle" aria-current="page" >TalkWith</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('app.login') }}">ログイン</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url_for('app.register') }}">新規登録</a>
+    </li>
+  </ul>
+</header>
+{% endblock header %}
+
+{% block content %}
+<p class="logout-info">
+  ログアウトしました。再び利用するにはログインするか、新規登録してください。
+</p>
+{% endblock content %}
